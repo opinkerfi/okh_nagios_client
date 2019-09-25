@@ -8,7 +8,7 @@ lint:
 platforms:
     - name: centos_6
       image: centos:6
-      privileged: True
+      privileged: true
     - name: centos_7
       image: centos:7
       command: /sbin/init
