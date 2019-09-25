@@ -1,0 +1,26 @@
+---
+- name: Install nrpe nagios packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - nagios-nrpe-server
+      - nagios-plugins
+
+- name: Copy nrpe.cfg to host
+  template:
+    src: templates/nrpe.cfg.j2
+    dest: /etc/nagios/nrpe.cfg
+    mode: 0644
+    owner: "{{ nagios_user[ansible_os_family] | first }}"
+    group: "{{ nagios_group[ansible_os_family] | first }}"
+  notify: Restart systemd service nrpe
+
+- name: Copy ok-bundle.cfg to host
+  template:
+    src: templates/ok-bundle.cfg.j2
+    dest: "{{ nrpe_dir[ansible_os_family] | first }}/ok-bundle.cfg"
+    mode: 0644
+    owner: "{{ nagios_user[ansible_os_family] | first }}"
+    group: "{{ nagios_group[ansible_os_family] | first }}"
+  notify: Restart systemd service nrpe

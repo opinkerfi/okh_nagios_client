@@ -1,0 +1,55 @@
+---
+- name: install epel
+  yum:
+    name: epel-release
+    state: present
+
+- name: Add OK repository
+  yum_repository:
+    name: ok
+    description: Opin Kerfi Public Repo
+    enabled: true
+    gpgcheck: false
+    failovermethod: priority
+    baseurl: http://opensource.is/repo/rhel$releasever/$basearch
+
+- name: Add OK Testing repository
+  yum_repository:
+    name: ok-testing
+    description: Opin Kerfi Public Repo - Testing
+    enabled: false
+    gpgcheck: false
+    failovermethod: priority
+    baseurl: http://opensource.is/repo/testing/rhel$releasever/$basearch
+
+- name: Install a nrpe and dependencies
+  yum:
+    name:
+      - nrpe
+      - nagios-plugins-check_cpu
+      - nagios-plugins-load
+      - nagios-plugins-procs
+      - nagios-plugins-swap
+      - nagios-okconfig-nrpe
+      - nagios-okplugin-check_firewall_active
+      - redhat-lsb
+    enablerepo: epel
+    state: present
+
+- name: Copy nrpe.cfg to host
+  template:
+    src: templates/nrpe.cfg.j2
+    dest: /etc/nagios/nrpe.cfg
+    mode: 0644
+    owner: "{{ nagios_user[ansible_os_family] | first }}"
+    group: "{{ nagios_group[ansible_os_family] | first }}"
+  notify: Restart systemd service nrpe
+
+- name: Copy ok-bundle.cfg to host
+  template:
+    src: templates/ok-bundle.cfg.j2
+    dest: "{{ nrpe_dir[ansible_os_family] | first }}/ok-bundle.cfg"
+    mode: 0644
+    owner: "{{ nagios_user[ansible_os_family] | first }}"
+    group: "{{ nagios_group[ansible_os_family] | first }}"
+  notify: Restart systemd service nrpe

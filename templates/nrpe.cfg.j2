@@ -1,0 +1,20 @@
+##############################################################################
+{{ ansible_managed }}
+##############################################################################
+
+server_port=5666
+allowed_hosts={{ allowed_hosts }}
+
+nrpe_user={{ nagios_user[ansible_os_family]|first }}
+nrpe_group={{ nagios_group[ansible_os_family]|first }}
+log_facility=daemon
+pid_file=/var/run/{{ nagios_user[ansible_os_family]|first }}/nrpe.pid
+dont_blame_nrpe=1
+debug=0
+command_timeout=60
+connection_timeout=300
+include_dir={{ nrpe_dir[ansible_os_family]|first }}
+
+command[check_dummy]={{ nagios_plugins_dir[ansible_os_family]|first }}/check_dummy 0
+command[check_users]={{ nagios_plugins_dir[ansible_os_family]|first }}/plugins/check_users -w 5 -c 10
+command[check_zombie_procs]={{ sudopath }}/sudo {{ nagios_plugins_dir[ansible_os_family]|first }}/check_procs -w 100 -c 150 -s Z -t 60

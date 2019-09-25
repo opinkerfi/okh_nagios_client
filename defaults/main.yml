@@ -1,0 +1,41 @@
+---
+# defaults file for okh_nagios_client
+allowed_hosts: "127.0.0.1"
+
+sudopath: "/usr/bin"
+
+nagios_user:
+    RedHat:
+        - nrpe
+    Debian:
+        - nagios
+
+nagios_group:
+    RedHat:
+        - nrpe
+    Debian:
+        - nagios
+
+nagios_plugins_dir:
+    RedHat:
+        - /usr/lib64/nagios/plugins
+    Debian:
+        - /usr/lib/nagios/plugins
+
+nrpe_dir:
+    RedHat:
+        - /etc/nrpe.d
+    Debian:
+        - /etc/nagios/nrpe.d
+
+nrpe_service:
+    RedHat:
+        - nrpe
+    Debian:
+        - nagios-nrpe-server
+
+nrpe_package:
+    RedHat:
+        - nrpe
+    Debian:
+        - nagios-nrpe-server
