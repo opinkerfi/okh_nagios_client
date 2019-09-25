@@ -24,7 +24,7 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - { role: okh_nagios_client, allowed_hosts: '127.0.0.1,94.142.159.1,94.142.159.26,94.142.159.5' }
+         - { role: okh_nagios_client, allowed_hosts: '127.0.0.1,75.122.123.197,29.188.162.212,49.252.86.230' }
 
 License
 -------
