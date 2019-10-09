@@ -2,6 +2,7 @@
 - name: Display all variables/facts known for a host
   debug:
     var: ansible_virtualization_type
+    verbosity: 1
 
 - name: "Run tasks for Red Hat flavoured tasks"
   include: redhat_flavour.yml
