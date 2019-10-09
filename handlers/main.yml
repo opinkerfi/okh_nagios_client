@@ -6,4 +6,4 @@
       state: restarted
       enabled: true
       name: "{{ nrpe_service[ansible_os_family] | first }}"
-  when: ansible_virtualization_type is not docker
+  when: ansible_virtualization_type == 'docker'

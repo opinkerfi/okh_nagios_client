@@ -1,8 +1,20 @@
 ---
-- name: install epel
+- name: Install epel on CentOS
   yum:
     name: epel-release
     state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: Install epel rpm on RHEL
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '7'
+
+- name: Enable a RHSM repository for RHEL 7
+  rhsm_repository:
+    name: rhel-7-server-rpms
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '7'
 
 - name: Add OK repository
   yum_repository:
@@ -35,21 +47,3 @@
       - redhat-lsb
     enablerepo: epel
     state: present
-
-- name: Copy nrpe.cfg to host
-  template:
-    src: templates/nrpe.cfg.j2
-    dest: /etc/nagios/nrpe.cfg
-    mode: 0644
-    owner: "{{ nagios_user[ansible_os_family] | first }}"
-    group: "{{ nagios_group[ansible_os_family] | first }}"
-  notify: Restart systemd service nrpe
-
-- name: Copy ok-bundle.cfg to host
-  template:
-    src: templates/ok-bundle.cfg.j2
-    dest: "{{ nrpe_dir[ansible_os_family] | first }}/ok-bundle.cfg"
-    mode: 0644
-    owner: "{{ nagios_user[ansible_os_family] | first }}"
-    group: "{{ nagios_group[ansible_os_family] | first }}"
-  notify: Restart systemd service nrpe
