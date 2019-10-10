@@ -29,7 +29,7 @@
   yum_repository:
     name: ok-testing
     description: Opin Kerfi Public Repo - Testing
-    enabled: false
+    enabled: true
     gpgcheck: false
     failovermethod: priority
     baseurl: http://opensource.is/repo/testing/rhel$releasever/$basearch
