@@ -5,12 +5,18 @@
     state: present
   when: ansible_distribution == 'CentOS'
 
-- name: Install epel rpm on RHEL
+- name: Install epel rpm on RHEL 7
   yum:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     state: present
   when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '7'
 
+- name: Install epel rpm on RHEL 8
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    state: present
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '8'
+  
 - name: Enable a RHSM repository for RHEL 7
   rhsm_repository:
     name: rhel-7-server-rpms
