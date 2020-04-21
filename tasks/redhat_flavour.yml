@@ -16,7 +16,7 @@
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     state: present
   when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '8'
-  
+
 - name: Enable a RHSM repository for RHEL 7
   rhsm_repository:
     name: rhel-7-server-rpms
@@ -44,6 +44,7 @@
   yum:
     name:
       - nrpe
+      - nrpe-selinux
       - nagios-plugins-check_cpu
       - nagios-plugins-load
       - nagios-plugins-procs
