@@ -6,7 +6,6 @@ driver:
 lint: |
     set -e
     yamllint .
-    ansible-lint
 platforms:
     - name: centos_6
       image: centos:6
