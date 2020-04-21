@@ -57,12 +57,12 @@
 
 - name: check if nagios check_service plugin exists
   stat:
-      path: /usr/lib64/nagios/plugins/check_service.sh
+    path: /usr/lib64/nagios/plugins/check_service.sh
   register: check_service_file
 
 - name: download and install nagios check_service plugin
   get_url:
-      url: https://raw.githubusercontent.com/opinkerfi/nagios-plugins/master/check_service.sh/check_service.sh
-      dest: /usr/lib/nagios/plugins//check_service.sh
-      mode: "a+x"
+    url: https://raw.githubusercontent.com/opinkerfi/nagios-plugins/master/check_service.sh/check_service.sh
+    dest: /usr/lib/nagios/plugins//check_service.sh
+    mode: "a+x"
   when: not check_service_file.stat.exists
