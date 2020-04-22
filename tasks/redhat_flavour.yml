@@ -16,7 +16,7 @@
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     state: present
   when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '8'
-  
+
 - name: Enable a RHSM repository for RHEL 7
   rhsm_repository:
     name: rhel-7-server-rpms
@@ -44,6 +44,7 @@
   yum:
     name:
       - nrpe
+      - nrpe-selinux
       - nagios-plugins-check_cpu
       - nagios-plugins-load
       - nagios-plugins-procs
@@ -53,3 +54,15 @@
       - redhat-lsb
     enablerepo: epel
     state: present
+
+- name: check if nagios check_service plugin exists
+  stat:
+    path: "{{ nagios_plugins_dir[ansible_os_family]|first }}/check_service.sh"
+  register: check_service_file
+
+- name: download and install nagios check_service plugin
+  get_url:
+    url: https://raw.githubusercontent.com/opinkerfi/nagios-plugins/master/check_service.sh/check_service.sh
+    dest: "{{ nagios_plugins_dir[ansible_os_family]|first }}/check_service.sh"
+    mode: "a+x"
+  when: not check_service_file.stat.exists
