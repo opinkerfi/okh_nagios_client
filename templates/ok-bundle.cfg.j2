@@ -27,3 +27,4 @@ command[check_disk]={{ nagios_plugins_dir[ansible_os_family]|first }}/check_disk
 command[check_load]={{ nagios_plugins_dir[ansible_os_family]|first }}/check_load -w '$ARG1$' -c '$ARG2$'
 command[check_total_procs]={{ nagios_plugins_dir[ansible_os_family]|first }}/check_procs -w '$ARG1$' -c '$ARG2$'
 command[check_cpu]={{ nagios_plugins_dir[ansible_os_family]|first }}/check_cpu.sh
+command[check_service]={{ nagios_plugins_dir[ansible_os_family]|first }}/check_service.sh -o linux -s '$ARG1$'
