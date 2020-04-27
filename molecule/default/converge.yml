@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: okh_nagios_client
+  tasks:
+    - name: "Include okh_nagios_client"
+      include_role:
+        name: "okh_nagios_client"
