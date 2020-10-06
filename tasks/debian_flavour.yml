@@ -2,6 +2,7 @@
 - name: Install nrpe nagios packages
   apt:
       name: "{{ packages }}"
+      cache_valid_time: 3600
   vars:
       packages:
           - nagios-nrpe-server
