@@ -2,7 +2,7 @@
 # handlers file for okh_nagios_client
 
 - name: Restart systemd service nrpe
-  systemd:
+  service:
       state: restarted
       enabled: true
       name: "{{ nrpe_service[ansible_os_family] | first }}"
