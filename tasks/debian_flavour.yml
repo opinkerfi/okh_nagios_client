@@ -1,12 +1,22 @@
 ---
-- name: Install nrpe nagios packages
+- name: Install list of packages
   apt:
-      name: "{{ packages }}"
-      cache_valid_time: 3600
-  vars:
-      packages:
-          - nagios-nrpe-server
-          - nagios-plugins
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - nagios-nrpe-server
+    - nagios-plugins
+
+#- name: Install nrpe nagios packages
+#  apt:
+#      name: "{{ packages }}"
+#      update_cache: yes
+#      cache_valid_time: 3600
+#  vars:
+#      packages:
+#          - nagios-nrpe-server
+#          - nagios-plugins
 
 - name: check if nagios check_cpu plugin exists
   stat:
