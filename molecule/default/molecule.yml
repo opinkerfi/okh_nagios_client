@@ -26,6 +26,8 @@ platforms:
           - /tmp
       volumes:
           - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    - name: docker-debian9-ansible
+      image: geerlingguy/docker-debian9-ansible
 #    - name: ubuntu_18_04
 #      image: geerlingguy/docker-ubuntu1804-ansible
 #    - name: debian_9
