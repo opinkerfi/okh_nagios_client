@@ -4,10 +4,10 @@ dependency:
 driver:
   name: docker
 platforms:
-    - name: centos_6
-      image: centos:6
-      privileged: true
-      pre_build_image: true
+ #   - name: centos_6
+ #     image: centos:6
+ #     privileged: true
+ #     pre_build_image: true
     - name: centos_7
       image: centos:7
       pre_build_image: true
@@ -26,10 +26,10 @@ platforms:
           - /tmp
       volumes:
           - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    - name: ubuntu_18_04
-      image: geerlingguy/docker-ubuntu1804-ansible
-    - name: debian_9
-      image: debian:9
+#    - name: ubuntu_18_04
+#      image: geerlingguy/docker-ubuntu1804-ansible
+#    - name: debian_9
+#      image: debian:9
 provisioner:
   name: ansible
 verifier:
