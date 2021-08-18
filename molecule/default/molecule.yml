@@ -28,8 +28,8 @@ platforms:
           - /sys/fs/cgroup:/sys/fs/cgroup:ro
 #    - name: ubuntu_18_04
 #      image: geerlingguy/docker-ubuntu1804-ansible
-#    - name: debian_9
-#      image: debian:9
+    - name: debian_9
+      image: debian:9
 provisioner:
   name: ansible
 verifier:
