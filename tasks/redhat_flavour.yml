@@ -28,7 +28,6 @@
     description: Opin Kerfi Public Repo
     enabled: true
     gpgcheck: false
-    failovermethod: priority
     baseurl: http://opensource.is/repo/rhel$releasever/$basearch
 
 - name: Add OK Testing repository
@@ -37,7 +36,6 @@
     description: Opin Kerfi Public Repo - Testing
     enabled: true
     gpgcheck: false
-    failovermethod: priority
     baseurl: http://opensource.is/repo/testing/rhel$releasever/$basearch
 
 - name: Install a nrpe and dependencies
@@ -45,13 +43,13 @@
     name:
       - nrpe
       - nrpe-selinux
+      - bc
       - nagios-plugins-check_cpu
       - nagios-plugins-load
       - nagios-plugins-procs
       - nagios-plugins-swap
       - nagios-okconfig-nrpe
       - nagios-okplugin-check_firewall_active
-      - redhat-lsb
     enablerepo: epel
     state: present
 
