@@ -15,6 +15,6 @@ before_script:
 molecule:
     stage: test
     script:
-        - pip3 install ansible molecule docker testinfra ansible-lint flake8
+        - pip3 install ansible molecule docker testinfra ansible-lint flake8 molecule-docker
         - ansible --version
         - molecule test
