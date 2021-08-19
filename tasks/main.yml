@@ -29,3 +29,8 @@
     owner: "{{ nagios_user[ansible_os_family] | first }}"
     group: "{{ nagios_group[ansible_os_family] | first }}"
   notify: Restart systemd service nrpe
+
+# X-Road plugin
+- name: "Install plugin for x-road"
+  include: nagios-plugin-x-road.yml
+  when: "'xroad-securityserver-is' in ansible_facts.packages"
