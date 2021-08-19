@@ -1,0 +1,8 @@
+---
+# X-Road plugin install
+- name: Install Nagios plugin for X-Road
+  ansible.builtin.package:
+    name: nagios-okplugin-check_xroad_token
+    state: present
+  when: "'xroad-securityserver-is' in ansible_facts.packages"
+  notify: Restart systemd service nrpe
