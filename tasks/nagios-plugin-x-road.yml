@@ -6,3 +6,14 @@
     state: present
   when: "'xroad-securityserver-is' in ansible_facts.packages"
   notify: Restart systemd service nrpe
+
+- name: Change the nrpe_t domain to permissive
+  community.general.selinux_permissive:
+    name: nrpe_t
+    permissive: true
+
+- name: allow nrpe to call sudo
+  ansible.posix.seboolean:
+    name: nagios_run_sudo
+    state: yes
+    persistent: yes
