@@ -39,7 +39,7 @@
     baseurl: http://opensource.is/repo/testing/rhel$releasever/$basearch
 
 - name: Install a nrpe and dependencies
-  yum:
+  package:
     name:
       - nrpe
       - nrpe-selinux
