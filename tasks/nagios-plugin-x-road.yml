@@ -1,5 +1,9 @@
 ---
 # X-Road plugin install
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Install Nagios plugin for X-Road
   ansible.builtin.package:
     name: nagios-okplugin-check_xroad_token
