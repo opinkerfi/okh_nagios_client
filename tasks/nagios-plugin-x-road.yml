@@ -8,7 +8,7 @@
   ansible.builtin.package:
     name: nagios-okplugin-check_xroad_token
     state: present
-  when: "'xroad-securityserver-is' in ansible_facts.packages"
+  when: "'xroad-securityserver-is' in ansible.builtin.package_facts"
   notify: Restart systemd service nrpe
 
 - name: Change the nrpe_t domain to permissive
