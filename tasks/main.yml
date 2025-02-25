@@ -30,6 +30,11 @@
     group: "{{ nagios_group[ansible_os_family] | first }}"
   notify: Restart systemd service nrpe
 
+# X-Road plugin prep
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 # X-Road plugin
 - name: "Install plugin for x-road"
   include: nagios-plugin-x-road.yml
